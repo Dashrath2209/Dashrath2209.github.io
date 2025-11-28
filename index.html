@@ -187,6 +187,10 @@
             cursor: pointer;
         }
 
+        .nav-links {
+            display: flex;
+        }
+
         .nav-links a {
             color: #fff;
             text-decoration: none;
@@ -209,6 +213,34 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #ffd369;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         /* Hero Section */
@@ -738,22 +770,221 @@
         }
 
         /* Responsive */
+        @media (max-width: 968px) {
+            .section {
+                padding: 20px 5%;
+            }
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 30px;
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+                transition: 0.4s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                margin: 0;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 18px;
+            }
+
+            .hero {
+                padding: 80px 5% 40px;
+                min-height: calc(100vh - 70px);
+            }
+
             .hero-content h1 {
-                font-size: 42px;
+                font-size: 36px;
+                line-height: 1.2;
+            }
+
+            .hero-content .subtitle {
+                font-size: 18px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+                padding: 0 20px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 25px;
+            }
+
+            .section-title {
+                font-size: 32px;
             }
 
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-text h3 {
+                font-size: 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .stat-card h4 {
+                font-size: 28px;
+            }
+
+            .experience-card,
+            .project-card,
+            .skill-category,
+            .contact-info {
+                padding: 25px;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .experience-header h3 {
+                font-size: 22px;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-links a {
-                margin-left: 15px;
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .education-timeline {
+                padding-left: 25px;
+            }
+
+            .education-item::before {
+                left: -32px;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .contact-item:hover {
+                transform: translateY(-5px);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            footer {
+                padding: 25px 5%;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 24px;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .hero-content .subtitle {
+                font-size: 16px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .experience-card,
+            .project-card,
+            .skill-category,
+            .contact-info {
+                padding: 20px;
+            }
+
+            .tech-stack,
+            .skill-tags {
+                gap: 8px;
+            }
+
+            .tech-badge,
+            .skill-tag {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .project-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .project-link {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .education-item h3 {
+                font-size: 18px;
             }
         }
     </style>
@@ -770,7 +1001,12 @@
     <!-- Navbar -->
     <nav>
         <div class="logo">Dasharath</div>
-        <div class="nav-links">
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
@@ -790,7 +1026,7 @@
                 <a href="#projects" class="btn btn-primary">
                     <i class="fas fa-code"></i> View Projects
                 </a>
-                <a href="https://1drv.ms/b/c/77e2c0ea4ba2fc0b/IQDEp1G3mBnwS64f6rAmqJm1AXZeLKOhxD_pa10wonZWQ_k?e=q8LaoV" target="_blank" class="btn btn-secondary">
+                <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view?usp=sharing" target="_blank" class="btn btn-secondary">
                     <i class="fas fa-download"></i> Download Resume
                 </a>
                 <a href="#contact" class="btn btn-secondary">
@@ -877,6 +1113,131 @@
             <div class="skill-category">
                 <h3><i class="fas fa-code"></i> Backend Development</h3>
                 <div class="skill-tags">
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">Spring Framework</span>
+                    <span class="skill-tag">Hibernate</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express.js</span>
+                    <span class="skill-tag">JWT Auth</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-laptop-code"></i> Frontend Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">Bootstrap</span>
+                    <span class="skill-tag">Responsive Design</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-database"></i> Databases</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">DBMS</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">IntelliJ IDEA</span>
+                    <span class="skill-tag">Maven</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-university"></i> Banking Domain</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Mobile Banking</span>
+                    <span class="skill-tag">UPI</span>
+                    <span class="skill-tag">RTGS/NEFT</span>
+                    <span class="skill-tag">NACH</span>
+                    <span class="skill-tag">Internet Banking</span>
+                    <span class="skill-tag">ATM Systems</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-brain"></i> Core Concepts</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">DSA</span>
+                    <span class="skill-tag">OOP</span>
+                    <span class="skill-tag">MVC Architecture</span>
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">Deployment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-blog project-icon"></i>
+                </div>
+                <h3>Blog Article Management System</h3>
+                <p>Complete blog management platform with JWT authentication, role-based access control, CRUD operations, and Docker containerization. Features comprehensive article management with comments and user authorization.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Spring Boot</span>
+                    <span class="tech-badge">JWT</span>
+                    <span class="tech-badge">Hibernate</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">REST API</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Dashrath2209/BLOG-ARTICLE-MANAGEMENT-SYSTEM" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-shopping-cart project-icon"></i>
+                </div>
+                <h3>E-Commerce System</h3>
+                <p>Full-featured Spring Boot E-commerce API with JWT authentication, product catalog, shopping cart, order management, and role-based user system integrated with MySQL database.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Spring Boot</span>
+                    <span class="tech-badge">JWT</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">REST API</span>
+                    <span class="tech-badge">Hibernate</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Dashrath2209/ecommerce-system" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-users project-icon"></i>
+                </div>
+                <h3>Employee Management System</h3>
+                <p>CRUD-based employee management application using Spring Boot with RESTful APIs, MySQL integration, and comprehensive service-layer validation for enterprise-level data management.</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Spring Boot</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">REST API</span>
                     <span class="tech-badge">CRUD</span>
                 </div>
                 <div class="project-links">
@@ -1021,134 +1382,32 @@
         <p style="margin-top: 10px; opacity: 0.8;">Built with passion for Full Stack Development</p>
     </footer>
 
-</body>     <div class="skill-category">
-                <h3><i class="fas fa-laptop-code"></i> JAVA/Backend Development</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">Spring Boot</span>
-                    <span class="skill-tag">Spring Framework</span>
-                    <span class="skill-tag">Hibernate</span>
-                    <span class="skill-tag">REST APIs</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Express.js</span>
-                    <span class="skill-tag">JWT Auth</span>
-                </div>
-            </div>
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-            <div class="skill-category">
-                <h3><i class="fas fa-laptop-code"></i> Frontend Development</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">React.js</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">Bootstrap</span>
-                    <span class="skill-tag">Responsive Design</span>
-                </div>
-            </div>
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
 
-            <div class="skill-category">
-                <h3><i class="fas fa-database"></i> Databases</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">MySQL</span>
-                    <span class="skill-tag">MongoDB</span>
-                    <span class="skill-tag">DBMS</span>
-                </div>
-            </div>
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
 
-            <div class="skill-category">
-                <h3><i class="fas fa-tools"></i> Tools & Tech...</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Git/GitHub</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Postman</span>
-                    <span class="skill-tag">VS Code</span>
-                    <span class="skill-tag">IntelliJ IDEA</span>
-                    <span class="skill-tag">Eclipse</span>
-                    <span class="skill-tag">Maven</span>
-                    <span class="skill-tag">AWS S3</span>
-                </div>
-            </div>
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
 
-            <div class="skill-category">
-                <h3><i class="fas fa-university"></i> Banking Domain</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Mobile Banking</span>
-                    <span class="skill-tag">UPI</span>
-                    <span class="skill-tag">RTGS/NEFT</span>
-                    <span class="skill-tag">NACH</span>
-                    <span class="skill-tag">Internet Banking</span>
-                    <span class="skill-tag">ATM Systems</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h3><i class="fas fa-brain"></i> Core Concepts</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">DSA</span>
-                    <span class="skill-tag">OOP</span>
-                    <span class="skill-tag">MVC Architecture</span>
-                    <span class="skill-tag">Microservices</span>
-                    <span class="skill-tag">Deployment</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Featured Projects</h2>
-        
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-blog project-icon"></i>
-                </div>
-                <h3>Blog Article Management System</h3>
-                <p>Complete blog management platform with JWT authentication, role-based access control, CRUD operations, and Docker containerization. Features comprehensive article management with comments and user authorization.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Spring Boot</span>
-                    <span class="tech-badge">JWT</span>
-                    <span class="tech-badge">Hibernate</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">Docker</span>
-                    <span class="tech-badge">REST API</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Dashrath2209/BLOG-ARTICLE-MANAGEMENT-SYSTEM" target="_blank" class="project-link">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-shopping-cart project-icon"></i>
-                </div>
-                <h3>E-Commerce System</h3>
-                <p>Full-featured Spring Boot E-commerce API with JWT authentication, product catalog, shopping cart, order management, and role-based user system integrated with MySQL database.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Spring Boot</span>
-                    <span class="tech-badge">JWT</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">REST API</span>
-                    <span class="tech-badge">Hibernate</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Dashrath2209/ecommerce-system" target="_blank" class="project-link">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-users project-icon"></i>
-                </div>
-                <h3>Employee Management System</h3>
-                <p>CRUD-based employee management application using Spring Boot with RESTful APIs, MySQL integration, and comprehensive service-layer validation for enterprise-level data management.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Spring Boot</span>
-                    <span class="tech-badge">MySQL</span>
-                    <span class="tech-badge">REST API</span>
-                    <span class
+</body>
+</html>
