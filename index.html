@@ -19,9 +19,92 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: #0a0a0a;
             color: #fff;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Auto-changing Background Slideshow - Faster Speed */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+            animation: backgroundSlideshow 20s infinite ease-in-out;
+        }
+
+        @keyframes backgroundSlideshow {
+            0% {
+                background-image: 
+                    linear-gradient(135deg, rgba(10, 10, 10, 0.90), rgba(30, 20, 60, 0.90)),
+                    url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&q=90');
+                opacity: 1;
+            }
+            30% {
+                background-image: 
+                    linear-gradient(135deg, rgba(10, 10, 10, 0.90), rgba(30, 20, 60, 0.90)),
+                    url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&q=90');
+                opacity: 1;
+            }
+            35% {
+                opacity: 0.7;
+            }
+            40% {
+                background-image: 
+                    linear-gradient(135deg, rgba(10, 10, 10, 0.90), rgba(30, 20, 60, 0.90)),
+                    url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=90');
+                opacity: 1;
+            }
+            65% {
+                background-image: 
+                    linear-gradient(135deg, rgba(10, 10, 10, 0.90), rgba(30, 20, 60, 0.90)),
+                    url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=90');
+                opacity: 1;
+            }
+            70% {
+                opacity: 0.7;
+            }
+            75% {
+                background-image: 
+                    linear-gradient(135deg, rgba(10, 10, 10, 0.90), rgba(30, 20, 60, 0.90)),
+                    url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=90');
+                opacity: 1;
+            }
+            95% {
+                background-image: 
+                    linear-gradient(135deg, rgba(10, 10, 10, 0.90), rgba(30, 20, 60, 0.90)),
+                    url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=90');
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.7;
+            }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 211, 105, 0.02) 2px,
+                    rgba(255, 211, 105, 0.02) 4px
+                );
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Animated Background */
@@ -32,24 +115,51 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.15;
         }
 
         .bg-animation span {
             position: absolute;
-            background: rgba(255, 211, 105, 0.3);
+            background: radial-gradient(circle, rgba(255, 211, 105, 0.4), transparent);
             border-radius: 50%;
-            animation: float 15s infinite ease-in-out;
+            animation: float 20s infinite ease-in-out;
+            filter: blur(40px);
         }
 
-        .bg-animation span:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
-        .bg-animation span:nth-child(2) { width: 120px; height: 120px; top: 70%; left: 80%; animation-delay: 2s; }
-        .bg-animation span:nth-child(3) { width: 60px; height: 60px; top: 40%; left: 60%; animation-delay: 4s; }
-        .bg-animation span:nth-child(4) { width: 100px; height: 100px; top: 80%; left: 20%; animation-delay: 6s; }
+        .bg-animation span:nth-child(1) { 
+            width: 300px; 
+            height: 300px; 
+            top: 10%; 
+            left: 10%; 
+            animation-delay: 0s; 
+        }
+        .bg-animation span:nth-child(2) { 
+            width: 400px; 
+            height: 400px; 
+            top: 60%; 
+            left: 70%; 
+            animation-delay: 3s; 
+        }
+        .bg-animation span:nth-child(3) { 
+            width: 250px; 
+            height: 250px; 
+            top: 40%; 
+            left: 50%; 
+            animation-delay: 6s; 
+        }
+        .bg-animation span:nth-child(4) { 
+            width: 350px; 
+            height: 350px; 
+            top: 80%; 
+            left: 20%; 
+            animation-delay: 9s; 
+        }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-30px) translateX(30px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(40px, 40px) scale(1.05); }
         }
 
         /* Navbar */
@@ -61,11 +171,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(20px);
-            background: rgba(15, 12, 41, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(10, 10, 10, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
@@ -178,7 +288,7 @@
         /* Section Styles */
         .section {
             max-width: 1200px;
-            margin: 100px auto;
+            margin: 80px auto;
             padding: 20px 8%;
         }
 
@@ -312,8 +422,8 @@
         /* Skills Section */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .skill-category {
@@ -325,7 +435,7 @@
         }
 
         .skill-category h3 {
-            font-size: 22px;
+            font-size: 20px;
             margin-bottom: 20px;
             color: #ffd369;
             display: flex;
@@ -334,28 +444,35 @@
         }
 
         .skill-category i {
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .skill-tag {
-            background: rgba(255, 211, 105, 0.15);
+            background: linear-gradient(135deg, rgba(255, 211, 105, 0.2), rgba(255, 158, 83, 0.15));
             padding: 10px 18px;
-            border-radius: 25px;
+            border-radius: 20px;
             font-size: 14px;
-            font-weight: 500;
-            border: 1px solid rgba(255, 211, 105, 0.3);
-            transition: all 0.3s;
+            font-weight: 600;
+            border: 1.5px solid rgba(255, 211, 105, 0.4);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            line-height: 1.4;
+            color: #ffe8b3;
+            box-shadow: 0 2px 8px rgba(255, 211, 105, 0.1);
         }
 
         .skill-tag:hover {
-            background: rgba(255, 211, 105, 0.3);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(255, 211, 105, 0.35), rgba(255, 158, 83, 0.25));
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 211, 105, 0.3);
+            border-color: rgba(255, 211, 105, 0.6);
+            color: #fff;
         }
 
         /* Projects Section */
@@ -429,11 +546,13 @@
         }
 
         .tech-badge {
-            background: rgba(255, 211, 105, 0.2);
-            padding: 5px 12px;
+            background: linear-gradient(135deg, rgba(255, 211, 105, 0.25), rgba(255, 158, 83, 0.2));
+            padding: 6px 14px;
             border-radius: 15px;
             font-size: 12px;
-            color: #ffd369;
+            font-weight: 600;
+            color: #ffe8b3;
+            border: 1px solid rgba(255, 211, 105, 0.4);
         }
 
         .project-links {
@@ -671,6 +790,9 @@
                 <a href="#projects" class="btn btn-primary">
                     <i class="fas fa-code"></i> View Projects
                 </a>
+                <a href="https://1drv.ms/b/c/77e2c0ea4ba2fc0b/IQDEp1G3mBnwS64f6rAmqJm1AXZeLKOhxD_pa10wonZWQ_k?e=q8LaoV" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
                 <a href="#contact" class="btn btn-secondary">
                     <i class="fas fa-envelope"></i> Get In Touch
                 </a>
@@ -899,8 +1021,10 @@
         <p style="margin-top: 10px; opacity: 0.8;">Built with passion for Full Stack Development</p>
     </footer>
 
-</body>
-</html>="skill-tag">Java</span>
+</body>     <div class="skill-category">
+                <h3><i class="fas fa-laptop-code"></i> JAVA/Backend Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Java</span>
                     <span class="skill-tag">Spring Boot</span>
                     <span class="skill-tag">Spring Framework</span>
                     <span class="skill-tag">Hibernate</span>
@@ -933,7 +1057,7 @@
             </div>
 
             <div class="skill-category">
-                <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                <h3><i class="fas fa-tools"></i> Tools & Tech...</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Git/GitHub</span>
                     <span class="skill-tag">Docker</span>
@@ -941,7 +1065,6 @@
                     <span class="skill-tag">VS Code</span>
                     <span class="skill-tag">IntelliJ IDEA</span>
                     <span class="skill-tag">Maven</span>
-                    <span class="skill-tag">npm</span>
                 </div>
             </div>
 
